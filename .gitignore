@@ -1,0 +1,47 @@
+# Ignorer les fichiers générés par Visual Studio
+.vscode/
+bin/
+obj/
+out/
+
+# Ignorer les fichiers générés par dotnet
+*.user
+*.suo
+*.appsettings.*
+*.Development.json
+*.Production.json
+*.Staging.json
+*.userprefs
+
+# Ignorer les fichiers de configuration npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignorer les fichiers de configuration React
+build/
+dist/
+*.log
+*.lock
+
+# Ignorer les fichiers de configuration pour Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignorer les fichiers de cache
+[Tt]humbs.db
+*.db
+
+# Ignorer les fichiers temporaires
+*.log
+*.bak
+*.swp
+*~
+
+# Ignorer les fichiers d'environnement
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

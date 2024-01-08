@@ -1,0 +1,14 @@
+
+.game-card {
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin: 8px;
+    text-align: center;
+    width: 175px; /* Taille fixe en pixels, ajuste selon tes besoins */
+    height: 200px; /* Taille fixe en pixels, ajuste selon tes besoins */
+}
+
+.game-card img {
+    max-width: 45%;
+    max-height: 45%;
+}
