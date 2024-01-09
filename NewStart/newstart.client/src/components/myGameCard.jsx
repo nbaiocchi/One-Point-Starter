@@ -1,6 +1,5 @@
 import './GameCard.css';
 import PropTypes from 'prop-types';
-import gameImage from '../assets/game-Zelda.jpg';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 
 
@@ -9,6 +8,8 @@ const MyGameCard = ({ game, removeToMyGames }) => {
     const handleRemoveFromMyGames = () => {
         removeToMyGames(game);
     };
+
+    const gameImage = new URL(`../assets/game-${game.name}.jpg`, import.meta.url).href;
 
 
     return (

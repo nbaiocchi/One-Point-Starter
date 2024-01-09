@@ -14,7 +14,7 @@ namespace OnePoint.Server.Controllers
             new Games { Name = "Pokemon", Description = "Un enfant braconier", Category = "RPG"},
             new Games { Name = "Zelda", Description = "Un chevalier qui joue de la flutte", Category = "RPG"},
             new Games { Name = "CallOfDuty", Description = "C'est la guerre", Category = "FPS"},
-            new Games { Name = "Battlefiel", Description = "C'est la guerre mais moin fun a jouer", Category = "FPS"}
+            new Games { Name = "Battlefield", Description = "C'est la guerre mais moin fun a jouer", Category = "FPS"}
         };
 
         [HttpGet]

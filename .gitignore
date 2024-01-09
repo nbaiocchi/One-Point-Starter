@@ -1,5 +1,6 @@
 # Ignorer les fichiers générés par Visual Studio
 .vscode/
+.vs/
 bin/
 obj/
 out/

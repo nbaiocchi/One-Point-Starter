@@ -1,6 +1,5 @@
 import './GameCard.css'; // Crée un fichier de style séparé si nécessaire
 import PropTypes from 'prop-types';
-import gameImage from '../assets/game-Zelda.jpg';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 
 
@@ -10,8 +9,8 @@ const GameCard = ({ game, onAddToMyGames }) => {
         onAddToMyGames(game);
     };
 
-/*    const gameImage = import(`../assets/game-${game.name}.jpg`).then(module => module.default);
-*/
+    const gameImage = new URL(`../assets/game-${game.name}.jpg`, import.meta.url).href;
+
     return (
         <div className="game-card">
             <img src={gameImage} alt={game.name} />
