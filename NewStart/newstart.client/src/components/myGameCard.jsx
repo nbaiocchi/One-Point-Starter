@@ -1,6 +1,9 @@
 import './GameCard.css';
 import PropTypes from 'prop-types';
 import { DefaultButton } from '@fluentui/react/lib/Button';
+import { Card } from '@fluentui/react-cards';
+
+const cardTokens = { childrenMargin: 10 };
 
 
 const MyGameCard = ({ game, removeToMyGames }) => {
@@ -9,25 +12,28 @@ const MyGameCard = ({ game, removeToMyGames }) => {
         removeToMyGames(game);
     };
 
-    const gameImage = new URL(`../assets/game-${game.name}.jpg`, import.meta.url).href;
-
+    const gameImage = new URL(`../assets/game-${game.gameName}.jpg`, import.meta.url).href;
 
     return (
-        <div className="game-card">
-            <img src={gameImage} alt={game.name} />
-            <h3>{game.name}</h3>
-            <p>{game.description}</p>
-            <p>{game.category}</p>
-            <DefaultButton onClick={handleRemoveFromMyGames}>Suprimer</DefaultButton>
-        </div>
+        <Card tokens={cardTokens} className="card-styles">
+            <Card.Section className="section-styles">
+                <img src={gameImage} alt={game.gameName} />
+            </Card.Section>
+            <Card.Section>
+                <h2>{game.gameName}</h2>
+                <p>{game.gameCategory}</p>
+                <p>{game.gameDescription}</p>
+                <DefaultButton onClick={handleRemoveFromMyGames}>Supprimer</DefaultButton>
+            </Card.Section>
+        </Card>
     );
 };
 
 MyGameCard.propTypes = {
     game: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        category: PropTypes.string.isRequired,
+        gameName: PropTypes.string.isRequired,
+        gameDescription: PropTypes.string.isRequired,
+        gameCategory: PropTypes.string.isRequired,
     }).isRequired,
     removeToMyGames: PropTypes.func.isRequired,
 };

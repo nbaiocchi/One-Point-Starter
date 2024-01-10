@@ -38,7 +38,7 @@ const App = () => {
                     <h2>Mes jeux</h2>
                     <div className="card-container">
                         {myGames.map((selectedGame) => (
-                            <MyGameCard key={selectedGame.name} game={selectedGame} removeToMyGames={handleRemoveFromMyGames} />
+                            <MyGameCard key={selectedGame.gameId} game={selectedGame} removeToMyGames={handleRemoveFromMyGames} />
                         ))}
                     </div>
                 </div>
@@ -46,7 +46,7 @@ const App = () => {
                     <h2>Bibliotech de jeux</h2>
                     <div className="card-container">
                         {games.map(game => (
-                            <GameCard key={game.name} game={game} onAddToMyGames={handleAddToMyGames} />
+                            <GameCard key={game.gameId} game={game} onAddToMyGames={handleAddToMyGames} />
                         ))}
                     </div>
                 </div>

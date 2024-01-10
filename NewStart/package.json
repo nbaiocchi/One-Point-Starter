@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@fluentui/react": "^8.114.1"
+    "@fluentui/react": "^8.114.2",
+    "@fluentui/react-cards": "^0.205.128",
+    "office-ui-fabric-react": "^7.204.0"
   }
 }
