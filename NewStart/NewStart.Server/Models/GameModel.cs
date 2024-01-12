@@ -7,7 +7,7 @@
 
         public string? GameDescription { get; set; }
 
-        public string? GameCategory { get; set; }
+        public List<string>? GameCategory { get; set;}
     }
 }
 

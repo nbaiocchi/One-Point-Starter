@@ -11,37 +11,36 @@ namespace OnePoint.Server.Controllers
     [Route("api/games")]
     public class GameController : ControllerBase
     {
-        /*public static readonly IEnumerable<Games> Items = new[]
-        {
-            new Games { Name = "Mario", Description = "Un plombier qui saute haut", Category = "Platformer"},
-            new Games { Name = "Sonic", Description = "Un herisson qui cour vite", Category = "Platformer"},
-            new Games { Name = "Pokemon", Description = "Un enfant braconier", Category = "RPG"},
-            new Games { Name = "Zelda", Description = "Un chevalier qui joue de la flutte", Category = "RPG"},
-            new Games { Name = "CallOfDuty", Description = "C'est la guerre", Category = "FPS"},
-            new Games { Name = "Battlefield", Description = "C'est la guerre mais moin fun a jouer", Category = "FPS"}
-        };
-
-        [HttpGet]
-        public IActionResult GetGames()
-        {
-            return Ok(Items);
-        }*/
-
         private const string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=my_game_db;Integrated Security=True;Connect Timeout=30;Encrypt=False;";
 
         [HttpGet]
         public IEnumerable<GameModel> GetGames()
         {
             List<GameModel> games = [];
+            List<string> categories = [];
 
             using (SqlConnection connection = new(ConnectionString))
             {
                 connection.Open();
 
-                string query = "SELECT * FROM Games";
+                /*string queryC = @"
+                    SELECT Games.GameId, Games.GameName, Games.GameDescription, Category.CategoryName
+                    FROM GameCategory
+                    INNER JOIN Games ON GameCategory.GameId = Games.GameId
+                    INNER JOIN Category ON GameCategory.CategoryId = Category.CategoryId
+                ";*/
 
-                using SqlCommand command = new(query, connection);
+                string queryC = @"
+                    SELECT Games.GameId, Games.GameName, Games.GameDescription, STRING_AGG(Category.CategoryName, ', ') AS CategoryList
+                    FROM GameCategory
+                    INNER JOIN Games ON GameCategory.GameId = Games.GameId
+                    INNER JOIN Category ON GameCategory.CategoryId = Category.CategoryId
+                    GROUP BY Games.GameId, Games.GameName, Games.GameDescription
+                ";
+
+                using SqlCommand command = new(queryC, connection);
                 using SqlDataReader reader = command.ExecuteReader();
+
                 while (reader.Read())
                 {
                     GameModel game = new()
@@ -49,7 +48,8 @@ namespace OnePoint.Server.Controllers
                         GameId = Convert.ToInt32(reader["GameId"]),
                         GameName = Convert.ToString(reader["GameName"]),
                         GameDescription = Convert.ToString(reader["GameDescription"]),
-                        GameCategory = Convert.ToString(reader["GameCategory"])
+                        /*GameCategory = Convert.ToString(reader["CategoryName"])*/
+                        GameCategory = [.. Convert.ToString(reader["CategoryList"]).Split(", ")]
                     };
 
                     games.Add(game);

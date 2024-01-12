@@ -23,7 +23,10 @@ const GameCard = ({ game, onAddToMyGames }) => {
             </Card.Section>
             <Card.Section>
                 <h2>{game.gameName}</h2>
-                <p>{game.gameCategory}</p>
+{/*                <p>{game.gameCategory}</p>
+*/}                {game.gameCategory.map(category => (
+                    <p key={category}>{category }</p>
+                )) }
                 <p>{game.gameDescription}</p>
                 <DefaultButton onClick={handleAddToMyGames}>Ajoute</DefaultButton>
             </Card.Section>
@@ -36,7 +39,7 @@ GameCard.propTypes = {
     game: PropTypes.shape({
         gameName: PropTypes.string.isRequired,
         gameDescription: PropTypes.string.isRequired,
-        gameCategory: PropTypes.string.isRequired,
+        gameCategory: PropTypes.array.isRequired,
     }).isRequired,
     onAddToMyGames: PropTypes.func.isRequired,
 };

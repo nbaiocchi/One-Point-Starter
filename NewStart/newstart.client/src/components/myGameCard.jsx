@@ -21,7 +21,9 @@ const MyGameCard = ({ game, removeToMyGames }) => {
             </Card.Section>
             <Card.Section>
                 <h2>{game.gameName}</h2>
-                <p>{game.gameCategory}</p>
+                {game.gameCategory.map(category => (
+                    <p key={category}>{category}</p>
+                ))}
                 <p>{game.gameDescription}</p>
                 <DefaultButton onClick={handleRemoveFromMyGames}>Supprimer</DefaultButton>
             </Card.Section>
@@ -33,7 +35,7 @@ MyGameCard.propTypes = {
     game: PropTypes.shape({
         gameName: PropTypes.string.isRequired,
         gameDescription: PropTypes.string.isRequired,
-        gameCategory: PropTypes.string.isRequired,
+        gameCategory: PropTypes.array.isRequired,
     }).isRequired,
     removeToMyGames: PropTypes.func.isRequired,
 };
