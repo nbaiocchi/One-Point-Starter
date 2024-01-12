@@ -1,4 +1,4 @@
-import './GameCard.css'; // Crée un fichier de style séparé si nécessaire
+import './css/GameCard.css'; 
 import PropTypes from 'prop-types';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { Card } from '@fluentui/react-cards';

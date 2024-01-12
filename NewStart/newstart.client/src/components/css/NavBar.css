@@ -1,0 +1,19 @@
+.navBarContainer {
+    background-color: #b8b9bd; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 10px 20px; /* Padding autour de la NavBar */
+    box-shadow: 0 2px 4px rgba(173, 172, 172, 0.2); /* Ombre sous la NavBar */
+}
+
+.navBarTitle {
+    font-size: 1.5rem; /* Taille du titre */
+    font-weight: bold; /* Épaisseur du titre */
+}
+
+.buttonStack {
+    align-items: center; /* Alignement vertical des boutons */
+}
+
+.buttonCollor {
+    color: #a3a4ab;
+}
