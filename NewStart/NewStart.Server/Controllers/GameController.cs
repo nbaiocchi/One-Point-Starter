@@ -19,6 +19,7 @@ namespace OnePoint.Server.Controllers
             List<GameModel> games = [];
             List<string> categories = [];
 
+
             using (SqlConnection connection = new(ConnectionString))
             {
                 connection.Open();
@@ -29,6 +30,8 @@ namespace OnePoint.Server.Controllers
                     INNER JOIN Games ON GameCategory.GameId = Games.GameId
                     INNER JOIN Category ON GameCategory.CategoryId = Category.CategoryId
                 ";*/
+
+                
 
                 string queryC = @"
                     SELECT Games.GameId, Games.GameName, Games.GameDescription, STRING_AGG(Category.CategoryName, ', ') AS CategoryList
@@ -48,8 +51,7 @@ namespace OnePoint.Server.Controllers
                         GameId = Convert.ToInt32(reader["GameId"]),
                         GameName = Convert.ToString(reader["GameName"]),
                         GameDescription = Convert.ToString(reader["GameDescription"]),
-                        /*GameCategory = Convert.ToString(reader["CategoryName"])*/
-                        GameCategory = [.. Convert.ToString(reader["CategoryList"]).Split(", ")]
+                        GameCategory = [.. Convert.ToString(reader["CategoryList"] ?? string.Empty).Split(", ")]
                     };
 
                     games.Add(game);
@@ -57,6 +59,7 @@ namespace OnePoint.Server.Controllers
             }
 
             return games;
+
         }
     }
 }

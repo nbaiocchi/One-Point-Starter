@@ -18,27 +18,9 @@ th, td {
     padding-right: 1rem;
 }
 
-.page-container {
-    display: grid;
-    background-color: aqua;
-}
-
 .card-container {
     display: flex;
     flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si nécessaire */
-    justify-content: space-between; /* Ajuste l'espacement entre les cartes selon tes besoins */
-}
-
-.container {
-    display: flex;
-}
-
-.left-section {
-    width: 50%;
-    background-color: #e0e0e0; /* Couleur de fond de la section gauche, à ajuster selon tes besoins */
-}
-
-.right-section {
-    width: 50%;
-    background-color: #f0f0f0; /* Couleur de fond de la section droite, à ajuster selon tes besoins */
+    justify-content: flex-start;
+    gap: 15px;
 }

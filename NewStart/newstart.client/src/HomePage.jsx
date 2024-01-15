@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-// import GameCard from "./components/GameCard";
 import MyGameCard from "./components/myGameCard";
 import "./css/HomePage.css";
 import NavBar from "./components/NavBar";
@@ -13,15 +11,6 @@ const HomePage = () => {
     setMyGames(updatedMesJeux);
   };
 
-  useEffect(() => {
-    fetch("/api/games")
-      .then((response) => response.json())
-      .then((data) => setGames(data))
-      .catch((error) =>
-        console.error("Erreur lors de la recuperation des jeux :", error)
-      );
-  }, []);
-
   return (
     <div>
       <NavBar />
@@ -32,6 +21,7 @@ const HomePage = () => {
             key={selectedGame.gameId}
             game={selectedGame}
             removeToMyGames={handleRemoveFromMyGames}
+            style={{ marginRight: "10px" }}
           />
         ))}
       </div>

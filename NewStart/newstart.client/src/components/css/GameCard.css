@@ -4,11 +4,16 @@
 
 .section-styles {
     padding: 5px;
-    margin: 10px;
+    margin: 5px;
 }
 
 
 .game-card img {
     max-width: 45%;
     max-height: 45%;
+}
+
+
+.button {
+    position: absolute;
 }
