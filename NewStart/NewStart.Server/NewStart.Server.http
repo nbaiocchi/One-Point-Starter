@@ -10,3 +10,8 @@ Accept: application/json
 
 ###
 
+GET {{NewStart.Server_HostAddress}}/api/todo/
+Accept: application/json
+
+###
+
