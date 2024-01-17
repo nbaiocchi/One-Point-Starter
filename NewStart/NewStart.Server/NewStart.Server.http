@@ -15,3 +15,7 @@ Accept: application/json
 
 ###
 
+GET {{NewStart.Server_HostAddress}}/api/blog/
+Accept: application/json
+
+###

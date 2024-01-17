@@ -10,6 +10,19 @@ namespace NewStart.Server.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Autres configurations...
+
+            modelBuilder.Entity<PostModelTagModel>().HasNoKey();
+        }
+
         public DbSet<TodoModel> Todo { get; set; }
+
+        public DbSet<TagModel> Tag { get; set; }
+
+        public DbSet<PostModel> Post { get; set; }
+
+        public DbSet<PostModelTagModel> PostTag { get; set; }
     }
 }

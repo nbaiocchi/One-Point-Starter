@@ -18,18 +18,6 @@ namespace NewStart.Server.Controllers
         }
 
         [HttpGet]
-/*        public async IEnumerable<TodoModel> GetTodos()
-        {*/
-            /*List<TodoModel> todos = [];
-
-            TodoModel todo = new()
-            {
-                Id = 1,
-                Name = "todo test",
-                Description = "test to impl ef core",
-            };
-
-            todos.Add(todo);*/
             public async Task<IActionResult> GetTodos()
             {
 
