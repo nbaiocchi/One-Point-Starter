@@ -1,65 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NewStart.Server;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NewStart.Server.Data;
 using NewStart.Server.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 
-namespace OnePoint.Server.Controllers
+namespace NewStart.Server.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/games")]
     public class GameController : ControllerBase
     {
-        private const string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=my_game_db;Integrated Security=True;Connect Timeout=30;Encrypt=False;";
+        public readonly DataContext _context;
+
+        public GameController(DataContext context)
+        {
+            _context = context;
+        }
+
+        /*[HttpGet]
+        public async Task<IActionResult> GetGames()
+        {
+
+            var games = await _context.GameModel.Include("Categories").ToListAsync();
+
+            return Ok(games);
+
+        }*/
 
         [HttpGet]
-        public IEnumerable<GameModel> GetGames()
+        public async Task<IActionResult> GetGames()
         {
-            List<GameModel> games = [];
-            List<string> categories = [];
+            var games = await _context.GameModel
+                .Include(g => g.Categories)
+                .ToListAsync();
 
-
-            using (SqlConnection connection = new(ConnectionString))
+            var gameViewModels = games.Select(g => new GameViewModel
             {
-                connection.Open();
+                GameId = g.GameId,
+                GameName = g.GameName,
+                GameDescription = g.GameDescription,
+                CategoryNames = g.Categories.Select(c => c.CategoryName).ToList()
+            }).ToList();
 
-                /*string queryC = @"
-                    SELECT Games.GameId, Games.GameName, Games.GameDescription, Category.CategoryName
-                    FROM GameCategory
-                    INNER JOIN Games ON GameCategory.GameId = Games.GameId
-                    INNER JOIN Category ON GameCategory.CategoryId = Category.CategoryId
-                ";*/
-
-                
-
-                string queryC = @"
-                    SELECT Games.GameId, Games.GameName, Games.GameDescription, STRING_AGG(Category.CategoryName, ', ') AS CategoryList
-                    FROM GameCategory
-                    INNER JOIN Games ON GameCategory.GameId = Games.GameId
-                    INNER JOIN Category ON GameCategory.CategoryId = Category.CategoryId
-                    GROUP BY Games.GameId, Games.GameName, Games.GameDescription
-                ";
-
-                using SqlCommand command = new(queryC, connection);
-                using SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    GameModel game = new()
-                    {
-                        GameId = Convert.ToInt32(reader["GameId"]),
-                        GameName = Convert.ToString(reader["GameName"]),
-                        GameDescription = Convert.ToString(reader["GameDescription"]),
-                        GameCategory = [.. Convert.ToString(reader["CategoryList"] ?? string.Empty).Split(", ")]
-                    };
-
-                    games.Add(game);
-                }
-            }
-
-            return games;
-
+            return Ok(gameViewModels);
         }
     }
 }

@@ -10,19 +10,17 @@ namespace NewStart.Server.Data
 
         }
 
+        public DbSet<GameModel>? GameModel { get; set; }
+
+        public DbSet<CategoryModel>? CategoryModel { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Autres configurations...
+            modelBuilder.Entity<GameModel>()
+                    .HasMany(x => x.Categories)
+                    .WithMany(x => x.Games)
+                    .UsingEntity(j => j.ToTable("GameCategory"));
 
-            modelBuilder.Entity<PostModelTagModel>().HasNoKey();
         }
-
-        public DbSet<TodoModel> Todo { get; set; }
-
-        public DbSet<TagModel> Tag { get; set; }
-
-        public DbSet<PostModel> Post { get; set; }
-
-        public DbSet<PostModelTagModel> PostTag { get; set; }
     }
 }

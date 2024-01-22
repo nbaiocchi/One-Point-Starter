@@ -5,17 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{NewStart.Server_HostAddress}}/api/games/
-Accept: application/json
-
-###
-
-GET {{NewStart.Server_HostAddress}}/api/todo/
-Accept: application/json
-
-###
-
-GET {{NewStart.Server_HostAddress}}/api/blog/
+GET {{NewStart.Server_HostAddress}}/api/Game/
 Accept: application/json
 
 ###
