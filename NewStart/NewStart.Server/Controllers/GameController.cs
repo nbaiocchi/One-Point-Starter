@@ -17,32 +17,40 @@ namespace NewStart.Server.Controllers
             _context = context;
         }
 
-        /*[HttpGet]
-        public async Task<IActionResult> GetGames()
-        {
-
-            var games = await _context.GameModel.Include("Categories").ToListAsync();
-
-            return Ok(games);
-
-        }*/
+        private const string NoGamesFoundMessage = "No games has been found in the DB";
 
         [HttpGet]
         public async Task<IActionResult> GetGames()
         {
-            var games = await _context.GameModel
-                .Include(g => g.Categories)
-                .ToListAsync();
-
-            var gameViewModels = games.Select(g => new GameViewModel
+            try
             {
-                GameId = g.GameId,
-                GameName = g.GameName,
-                GameDescription = g.GameDescription,
-                CategoryNames = g.Categories.Select(c => c.CategoryName).ToList()
-            }).ToList();
+                var games = await _context.GameModel
+                    .Include(g => g.Categories)
+                    .ToListAsync();
 
-            return Ok(gameViewModels);
+                if (games == null || !games.Any())
+                {
+                    return NotFound(NoGamesFoundMessage);
+                }
+
+                var gameViewModels = games.Select(g => new GameViewModel
+                {
+
+                    GameId = g.GameId,
+                    GameName = g.GameName,
+                    GameDescription = g.GameDescription,
+                    CategoryNames = g.Categories?.Select(c => c.CategoryName).ToList()
+                }).ToList();
+
+                return Ok(gameViewModels);
+            }
+
+            catch (Exception error)
+            {
+                Console.Error.WriteLine($"An error pop up: {error.Message}");
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error pop up while processing your request.");
+            }
         }
     }
 }

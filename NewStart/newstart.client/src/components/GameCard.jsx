@@ -11,21 +11,21 @@ const GameCard = ({ game, onAddToMyGames }) => {
   };
 
   const gameImage = new URL(
-    `../assets/game-${game.gameName}.jpg`,
+      `../assets/game-${game.gameName}.jpg`,
     import.meta.url
   ).href;
 
   return (
     <Card tokens={cardTokens} className="card-styles">
       <Card.Section className="section-styles">
-        <img src={gameImage} alt={game.gameName} />
+              <img src={gameImage} alt={game.gameName} />
       </Card.Section>
       <Card.Section>
-        <h2>{game.gameName}</h2>
-        {game.gameCategory.map((category) => (
+              <h2>{game.gameName}</h2>
+              {game.categoryNames.map((category) => (
           <p key={category}>{category}</p>
         ))}
-        <p>{game.gameDescription}</p>
+              <p>{game.gameDescription}</p>
         <DefaultButton onClick={handleAddToMyGames}>Ajoute</DefaultButton>
       </Card.Section>
     </Card>
@@ -34,9 +34,9 @@ const GameCard = ({ game, onAddToMyGames }) => {
 
 GameCard.propTypes = {
   game: PropTypes.shape({
-    gameName: PropTypes.string.isRequired,
-    gameDescription: PropTypes.string.isRequired,
-    gameCategory: PropTypes.array.isRequired,
+      gameName: PropTypes.string.isRequired,
+      gameDescription: PropTypes.string.isRequired,
+      categoryNames: PropTypes.array.isRequired,
   }).isRequired,
   onAddToMyGames: PropTypes.func.isRequired,
 };

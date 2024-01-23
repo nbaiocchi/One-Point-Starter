@@ -50,7 +50,7 @@ export default defineConfig({
                 target: 'https://localhost:7231/',
                 secure: false
             },
-            '^/api/games': {
+            '^/api/Game': {
                 target: 'https://localhost:7231/',
                 secure: false
             }

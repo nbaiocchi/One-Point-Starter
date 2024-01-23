@@ -17,7 +17,7 @@ const BoutiquePage = () => {
   };
 
   useEffect(() => {
-    fetch("/api/games")
+    fetch("/api/Game")
       .then((response) => response.json())
       .then((data) => setGames(data))
       .catch((error) =>
@@ -32,7 +32,7 @@ const BoutiquePage = () => {
       <div className="card-container">
         {games.map((game) => (
           <GameCard
-            key={game.gameId}
+            key={game.GameId}
             game={game}
             onAddToMyGames={handleAddToMyGames}
           />
